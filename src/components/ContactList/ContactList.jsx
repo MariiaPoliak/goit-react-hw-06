@@ -1,10 +1,12 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../redux/contactsSlice';
-import { FaTrashAlt } from 'react-icons/fa'; // Importing trash icon from react-icons
+import { FaTrashAlt } from 'react-icons/fa';
 import styles from './ContactList.module.css';
+import { selectContacts } from '../../redux/contactsSlice';
 
-const ContactList = ({ contacts }) => {
+const ContactList = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
 
   const handleDelete = (id) => {
     dispatch(deleteContact(id));
