@@ -1,35 +1,25 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from '../../redux/contactsSlice';
-import { FaTrashAlt } from 'react-icons/fa';
+import PropTypes from 'prop-types';
+import Contact from '../Contact/Contact';
 import styles from './ContactList.module.css';
-import { selectContacts } from '../../redux/contactsSlice';
 
-const ContactList = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-
-  const handleDelete = (id) => {
-    dispatch(deleteContact(id));
-  };
-
+const ContactList = ({ contacts }) => {
   return (
     <ul className={styles.contact_box}>
-      {contacts.map(({ id, name, number }) => (
-        <li key={id} className={styles.contact_item}>
-          <p>
-            {name}: {number}
-          </p>
-          <button
-            className={styles.button}
-            onClick={() => handleDelete(id)}
-            aria-label="Delete contact"
-          >
-            <FaTrashAlt className={styles.icon} /> Delete
-          </button>
-        </li>
+      {contacts.map((contact) => (
+        <Contact key={contact.id} contact={contact} />
       ))}
     </ul>
   );
+};
+
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
 };
 
 export default ContactList;

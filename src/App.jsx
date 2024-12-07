@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from './redux/contactsSlice';
 import { selectNameFilter, changeFilter } from './redux/filtersSlice';
@@ -17,8 +17,12 @@ function App() {
     dispatch(changeFilter(e.target.value));
   };
 
-  const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
+  const filteredContacts = useMemo(
+    () =>
+      contacts.filter((contact) =>
+        contact.name.toLowerCase().includes(filter.toLowerCase())
+      ),
+    [contacts, filter]
   );
 
   return (
