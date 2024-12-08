@@ -14,7 +14,7 @@ function App() {
   const filter = useSelector(selectNameFilter);
 
   const handleChangeFilter = (e) => {
-    dispatch(changeFilter(e.target.value));
+    dispatch(setNameFilter(e.target.value));
   };
 
   const filteredContacts = useMemo(

@@ -8,7 +8,7 @@ const SearchBox = () => {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    dispatch(changeFilter(e.target.value)); // Змінюємо фільтр
+    dispatch(setNameFilter(e.target.value)); // Змінюємо фільтр
   };
 
   return (
